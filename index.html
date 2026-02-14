@@ -1,1 +1,240 @@
-<h1>AKU BERHASIL 💗</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Abdullah 💗</title>
+
+<!-- Google Font aesthetic -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  text-align:center;
+  background:linear-gradient(180deg,#ffd6e7,#fff0f6);
+  overflow-x:hidden;
+}
+
+h1{
+  margin-top:60px;
+  font-weight:600;
+}
+
+img{
+  width:210px;
+  border-radius:18px;
+  margin-top:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* tombol */
+.btn{
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  position:absolute;
+  transition:all .25s ease;
+}
+
+#yes{background:#ff4d6d;color:white;left:34%;}
+#no{background:#999;color:white;left:55%;}
+
+/* hati */
+.heart{
+  position:fixed;
+  top:-10px;
+  animation:fall linear forwards;
+  font-size:18px;
+}
+
+@keyframes fall{
+  to{transform:translateY(100vh);opacity:0;}
+}
+
+/* overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.82);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
+  text-align:center;
+  padding:20px;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+
+/* fade */
+.fade{
+  opacity:0;
+  transform:translateY(10px);
+  transition:1s ease;
+}
+
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* shake lembut */
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-2px);}
+  75%{transform:translateX(2px);}
+}
+
+.shake{
+  animation:shake .6s infinite;
+}
+
+.letter{
+  max-width:720px;
+  margin:80px auto;
+  font-size:18px;
+  line-height:1.8;
+  padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Abdullah Mohammed Ahmed Bafadel,<br>will you be my Valentine? 💕</h1>
+
+<img src="foto.jpg">
+
+<button id="yes" class="btn">Yes 💖</button>
+<button id="no" class="btn">No</button>
+
+<audio id="music" loop>
+  <source src="wifyl.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const whatsapp="https://wa.me/628xxxxxxxxxx?text=I%20choose%20you%20❤️";
+
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const music=document.getElementById("music");
+
+let scale=1;
+
+// no kabur
+noBtn.addEventListener("click",()=>{
+  const x=Math.random()*window.innerWidth*0.8;
+  const y=Math.random()*window.innerHeight*0.8;
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
+  scale+=0.25;
+  yesBtn.style.transform=`scale(${scale})`;
+});
+
+// yes pertama
+yesBtn.addEventListener("click",()=>{
+  music.play();
+
+  document.body.innerHTML=`
+  <div class="letter">
+    <h1>For Abdullah 💗</h1>
+
+    <p>Dear My love of my life,</p>
+
+    <p>
+    To you, standing far away from me, separated by thousands of kilometers,
+    yet somehow living in every beat of my heart.
+    </p>
+
+    <p>
+    Thank you for staying with me this far. Thank you for holding my hand even when it’s hard,
+    for becoming a home for all my worries, my chaos, and every small piece of me.
+    Thank you for loving me while knowing I am far from perfect.
+    </p>
+
+    <p>
+    I’m sorry I haven’t become the version of myself that you truly deserve.
+    I’m sorry if my love still feels smaller than what you give to me.
+    And I’m sorry you must face my moods — my pessimistic thoughts, my impatience,
+    my endless complaints, the weight I carry, my tears, and the many flaws
+    I am still learning to fix.
+    </p>
+
+    <p>
+    Through every storm that I sometimes bring into our sky, you stay.
+    And that means more than I could ever explain.
+    </p>
+
+    <p>
+    These months with you have been a journey of highs and lows, laughter and breakdowns,
+    warm hugs through a cold distance. It is not easy — loving me is not easy —
+    but you are still here.
+    </p>
+
+    <p>Thank you. From the deepest part of my heart, thank you.</p>
+
+    <p>
+    I am so grateful you walked into my life and painted it with colors
+    I never knew existed. You are, and will always be,
+    the most beautiful gift I have ever received.
+    </p>
+
+    <p>Your Baby 💗</p>
+  </div>
+
+  <div id="overlay" class="overlay">
+    <p id="l1" class="fade">And if you still choose me...</p>
+    <p id="l2" class="fade" style="margin-top:15px;">
+    after the distance, the flaws, the storms, and everything in between…
+    </p>
+
+    <h2 id="big" class="fade" style="margin-top:30px;font-size:34px;">
+    Will you be my Valentine? 💕
+    </h2>
+
+    <button id="finalYes" class="fade"
+      style="margin-top:30px;padding:18px 40px;font-size:24px;
+      border:none;border-radius:16px;background:#ff4d6d;color:white;cursor:pointer;">
+      YES 💖
+    </button>
+  </div>
+  `;
+
+  const show=id=>document.getElementById(id).classList.add("show");
+
+  setTimeout(()=>show("overlay"),4000);
+  setTimeout(()=>show("l1"),5500);
+  setTimeout(()=>show("l2"),7000);
+
+  setTimeout(()=>{
+    show("big");
+    document.getElementById("overlay").classList.add("shake");
+  },8500);
+
+  setTimeout(()=>show("finalYes"),10000);
+
+  document.addEventListener("click",e=>{
+    if(e.target && e.target.id==="finalYes"){
+      window.location.href=whatsapp;
+    }
+  });
+});
+
+// hati awal
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerText="💗";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*2+3)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
+
+</body>
+  </html>
