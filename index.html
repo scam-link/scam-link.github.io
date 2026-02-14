@@ -42,11 +42,6 @@ img{
   text-align:left;
 }
 
-.highlight{
-  color:#ff4d6d;
-  font-weight:700;
-}
-
 .overlay{
   position:fixed;
   inset:0;
@@ -77,10 +72,12 @@ img{
 <button id="yes" class="btn">Yes 💖</button>
 <button id="no" class="btn">No</button>
 
+<!-- musik baca surat -->
 <audio id="music" loop>
   <source src="romantis.mp3" type="audio/mpeg">
 </audio>
 
+<!-- suara confetti -->
 <audio id="confettiSound">
   <source src="confetti" type="audio/mpeg">
 </audio>
@@ -107,7 +104,7 @@ yesBtn.addEventListener("click",()=>{
 
   document.body.innerHTML=`
   <div class="letter">
-    <h1>For Abdullah 💗</h1>
+    <h1 style="text-align:center">For Abdullah 💗</h1>
     <div id="type"></div>
   </div>
 
@@ -125,24 +122,24 @@ yesBtn.addEventListener("click",()=>{
   music.play();
 
   const text = `
-Dear My love of my life,
+Dear My love of my life,<br><br>
 
 To you, standing far away from me, separated by thousands of kilometers,
-yet somehow living in every beat of my heart.
+yet somehow living in every beat of my heart.<br><br>
 
 Thank you for staying with me this far.
-Thank you for loving me while knowing I am far from perfect.
+Thank you for loving me while knowing I am far from perfect.<br><br>
 
 I'm sorry I haven’t become the version of myself that you truly deserve.
-I'm sorry if my love still feels smaller than what you give to me.
+I'm sorry if my love still feels smaller than what you give to me.<br><br>
 
-Through every storm, you stay.
+Through every storm, you stay.<br><br>
 
-Thank you.
-From the deepest part of my heart, thank you.
+Thank you.<br>
+From the deepest part of my heart, thank you.<br><br>
 
 You are, and will always be,
-the most beautiful gift I have ever received.
+the most beautiful gift I have ever received.<br><br>
 
 Your Baby 💗
 `;
@@ -156,15 +153,8 @@ Your Baby 💗
       i++;
       setTimeout(typeWriter,35);
     } else {
-      highlight();
       setTimeout(showOverlay,2000);
     }
-  }
-
-  function highlight(){
-    target.innerHTML=target.innerHTML
-      .replaceAll("Thank you","<span class='highlight'>Thank you</span>")
-      .replaceAll("I'm sorry","<span class='highlight'>I'm sorry</span>");
   }
 
   function showOverlay(){
