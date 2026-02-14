@@ -37,21 +37,24 @@ img{
 #yes{background:#ff4d6d;color:white;left:34%;}
 #no{background:#999;color:white;left:55%;}
 
-.heart{
-  position:fixed;
-  top:-10px;
-  animation:fall linear forwards;
+.letter{
+  max-width:720px;
+  margin:80px auto;
   font-size:18px;
+  line-height:2;
+  padding:20px;
+  text-align:left;
 }
 
-@keyframes fall{
-  to{transform:translateY(100vh);opacity:0;}
+.highlight{
+  color:#ff4d6d;
+  font-weight:700;
 }
 
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.88);
+  background:rgba(0,0,0,.9);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -74,20 +77,8 @@ img{
   transform:translateY(0);
 }
 
-@keyframes shake{
-  0%,100%{transform:translateX(0);}
-  25%{transform:translateX(-2px);}
-  75%{transform:translateX(2px);}
-}
-
-.shake{animation:shake .8s infinite;}
-
-.letter{
-  max-width:720px;
-  margin:80px auto;
-  font-size:18px;
-  line-height:2;
-  padding:20px;
+@keyframes fall{
+  to{transform:translateY(100vh);opacity:0;}
 }
 </style>
 </head>
@@ -95,14 +86,19 @@ img{
 <body>
 
 <h1>Abdullah Mohammed Ahmed Bafadel,<br>will you be my Valentine? 💕</h1>
-
 <img src="abody.jpg">
 
 <button id="yes" class="btn">Yes 💖</button>
 <button id="no" class="btn">No</button>
 
+<!-- musik utama -->
 <audio id="music" loop>
   <source src="romantis.mp3" type="audio/mpeg">
+</audio>
+
+<!-- suara confetti -->
+<audio id="confettiSound">
+  <source src="confetti.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -111,6 +107,7 @@ const whatsapp="https://wa.me/6287798652617?text=I%20choose%20you%20❤️";
 const noBtn=document.getElementById("no");
 const yesBtn=document.getElementById("yes");
 const music=document.getElementById("music");
+const confettiSound=document.getElementById("confettiSound");
 
 let scale=1;
 
@@ -128,61 +125,14 @@ yesBtn.addEventListener("click",()=>{
   document.body.innerHTML=`
   <div class="letter">
     <h1>For Abdullah 💗</h1>
-
-    <p>Dear My love of my life,</p>
-
-    <p>
-    To you, standing far away from me, separated by thousands of kilometers,
-    yet somehow living in every beat of my heart.
-    </p>
-
-    <p>
-    Thank you for staying with me this far. Thank you for holding my hand even when it’s hard,
-    for becoming a home for all my worries, my chaos, and every small piece of me.
-    Thank you for loving me while knowing I am far from perfect.
-    </p>
-
-    <p>
-    I’m sorry I haven’t become the version of myself that you truly deserve.
-    I’m sorry if my love still feels smaller than what you give to me.
-    And I’m sorry you must face my moods — my pessimistic thoughts, my impatience,
-    my endless complaints, the weight I carry, my tears, and the many flaws
-    I am still learning to fix.
-    </p>
-
-    <p>
-    Through every storm that I sometimes bring into our sky, you stay.
-    And that means more than I could ever explain.
-    </p>
-
-    <p>
-    These months with you have been a journey of highs and lows, laughter and breakdowns,
-    warm hugs through a cold distance. It is not easy — loving me is not easy —
-    but you are still here.
-    </p>
-
-    <p>Thank you. From the deepest part of my heart, thank you.</p>
-
-    <p>
-    I am so grateful you walked into my life and painted it with colors
-    I never knew existed. You are, and will always be,
-    the most beautiful gift I have ever received.
-    </p>
-
-    <p>Your Baby 💗</p>
+    <p>Thank you for everything. I'm sorry for my flaws.</p>
   </div>
 
   <div id="overlay" class="overlay">
     <p id="l1" class="fade">And if you still choose me...</p>
-
-    <p id="l2" class="fade" style="margin-top:15px;">
-    after the distance, the flaws, the storms, and everything in between…
-    </p>
-
-    <h2 id="big" class="fade" style="margin-top:30px;font-size:34px;">
+    <h2 id="big" class="fade" style="margin-top:20px;">
     Will you be my Valentine? 💕
     </h2>
-
     <button id="finalYes" class="fade"
       style="margin-top:30px;padding:18px 40px;font-size:24px;
       border:none;border-radius:16px;background:#ff4d6d;color:white;cursor:pointer;">
@@ -191,26 +141,22 @@ yesBtn.addEventListener("click",()=>{
   </div>
   `;
 
-  // musik mulai saat surat muncul
-  setTimeout(()=>{document.getElementById("music").play();},500);
+  music.play();
 
   const show=id=>document.getElementById(id).classList.add("show");
 
-  setTimeout(()=>document.getElementById("overlay").style.opacity=1,55000);
-
-  // gelap hanya 2 detik
-  setTimeout(()=>show("l1"),57000);
-  setTimeout(()=>show("l2"),62000);
-
-  setTimeout(()=>{
-    show("big");
-    document.getElementById("overlay").classList.add("shake");
-  },67000);
-
-  setTimeout(()=>show("finalYes"),71000);
+  setTimeout(()=>document.getElementById("overlay").style.opacity=1,3000);
+  setTimeout(()=>show("l1"),5000);
+  setTimeout(()=>show("big"),8000);
+  setTimeout(()=>show("finalYes"),11000);
 
   document.addEventListener("click",e=>{
     if(e.target && e.target.id==="finalYes"){
+
+      // 🔊 suara pesta
+      confettiSound.play();
+
+      // 🎉 confetti visual
       for(let i=0;i<120;i++){
         const c=document.createElement("div");
         c.innerHTML="🎉";
@@ -222,21 +168,12 @@ yesBtn.addEventListener("click",()=>{
         document.body.appendChild(c);
         setTimeout(()=>c.remove(),4000);
       }
-      setTimeout(()=>{window.location.href=whatsapp;},2000);
+
+      setTimeout(()=>window.location.href=whatsapp,2000);
     }
   });
 });
-
-setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerText="💗";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(Math.random()*2+3)+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
-},300);
 </script>
 
 </body>
-  </html>
+</html>
