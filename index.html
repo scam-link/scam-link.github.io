@@ -72,12 +72,10 @@ img{
 <button id="yes" class="btn">Yes 💖</button>
 <button id="no" class="btn">No</button>
 
-<!-- musik baca surat -->
 <audio id="music" loop>
   <source src="romantis.mp3" type="audio/mpeg">
 </audio>
 
-<!-- suara confetti -->
 <audio id="confettiSound">
   <source src="confetti" type="audio/mpeg">
 </audio>
@@ -123,24 +121,17 @@ yesBtn.addEventListener("click",()=>{
 
   const text = `
 Dear My love of my life,<br><br>
-
 To you, standing far away from me, separated by thousands of kilometers,
 yet somehow living in every beat of my heart.<br><br>
-
 Thank you for staying with me this far.
 Thank you for loving me while knowing I am far from perfect.<br><br>
-
 I'm sorry I haven’t become the version of myself that you truly deserve.
 I'm sorry if my love still feels smaller than what you give to me.<br><br>
-
 Through every storm, you stay.<br><br>
-
 Thank you.<br>
 From the deepest part of my heart, thank you.<br><br>
-
 You are, and will always be,
 the most beautiful gift I have ever received.<br><br>
-
 Your Baby 💗
 `;
 
@@ -149,9 +140,18 @@ Your Baby 💗
 
   function typeWriter(){
     if(i<text.length){
-      target.innerHTML+=text.charAt(i);
-      i++;
+
+      // 🔥 kalau ketemu <br> → langsung masukkan
+      if(text.substring(i,i+4)==="<br>"){
+        target.innerHTML+="<br>";
+        i+=4;
+      } else {
+        target.innerHTML+=text.charAt(i);
+        i++;
+      }
+
       setTimeout(typeWriter,35);
+
     } else {
       setTimeout(showOverlay,2000);
     }
