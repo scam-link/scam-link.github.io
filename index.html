@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>For Abdullah 💗</title>
 
-<!-- Google Font aesthetic -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -16,10 +15,7 @@ body{
   overflow-x:hidden;
 }
 
-h1{
-  margin-top:60px;
-  font-weight:600;
-}
+h1{margin-top:60px;}
 
 img{
   width:210px;
@@ -28,7 +24,6 @@ img{
   box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* tombol */
 .btn{
   padding:15px 30px;
   font-size:18px;
@@ -42,7 +37,6 @@ img{
 #yes{background:#ff4d6d;color:white;left:34%;}
 #no{background:#999;color:white;left:55%;}
 
-/* hati */
 .heart{
   position:fixed;
   top:-10px;
@@ -54,7 +48,6 @@ img{
   to{transform:translateY(100vh);opacity:0;}
 }
 
-/* overlay */
 .overlay{
   position:fixed;
   inset:0;
@@ -70,11 +63,10 @@ img{
   transition:opacity 1.5s ease;
 }
 
-/* fade */
 .fade{
   opacity:0;
   transform:translateY(10px);
-  transition:1s ease;
+  transition:1.2s ease;
 }
 
 .show{
@@ -82,22 +74,19 @@ img{
   transform:translateY(0);
 }
 
-/* shake lembut */
 @keyframes shake{
   0%,100%{transform:translateX(0);}
   25%{transform:translateX(-2px);}
   75%{transform:translateX(2px);}
 }
 
-.shake{
-  animation:shake .6s infinite;
-}
+.shake{animation:shake .7s infinite;}
 
 .letter{
   max-width:720px;
   margin:80px auto;
   font-size:18px;
-  line-height:1.8;
+  line-height:1.9;
   padding:20px;
 }
 </style>
@@ -107,17 +96,17 @@ img{
 
 <h1>Abdullah Mohammed Ahmed Bafadel,<br>will you be my Valentine? 💕</h1>
 
-<img src="foto.jpg">
+<img src="abody.jpg">
 
 <button id="yes" class="btn">Yes 💖</button>
 <button id="no" class="btn">No</button>
 
 <audio id="music" loop>
-  <source src="wifyl.mp3" type="audio/mpeg">
+  <source src="wifyl" type="audio/mpeg">
 </audio>
 
 <script>
-const whatsapp="https://wa.me/628xxxxxxxxxx?text=I%20choose%20you%20❤️";
+const whatsapp="https://wa.me/6287798652617?text=I%20choose%20you%20❤️";
 
 const noBtn=document.getElementById("no");
 const yesBtn=document.getElementById("yes");
@@ -125,7 +114,6 @@ const music=document.getElementById("music");
 
 let scale=1;
 
-// no kabur
 noBtn.addEventListener("click",()=>{
   const x=Math.random()*window.innerWidth*0.8;
   const y=Math.random()*window.innerHeight*0.8;
@@ -135,7 +123,6 @@ noBtn.addEventListener("click",()=>{
   yesBtn.style.transform=`scale(${scale})`;
 });
 
-// yes pertama
 yesBtn.addEventListener("click",()=>{
   music.play();
 
@@ -188,6 +175,7 @@ yesBtn.addEventListener("click",()=>{
 
   <div id="overlay" class="overlay">
     <p id="l1" class="fade">And if you still choose me...</p>
+
     <p id="l2" class="fade" style="margin-top:15px;">
     after the distance, the flaws, the storms, and everything in between…
     </p>
@@ -206,16 +194,16 @@ yesBtn.addEventListener("click",()=>{
 
   const show=id=>document.getElementById(id).classList.add("show");
 
-  setTimeout(()=>show("overlay"),4000);
-  setTimeout(()=>show("l1"),5500);
-  setTimeout(()=>show("l2"),7000);
+  setTimeout(()=>show("overlay"),6000);
+  setTimeout(()=>show("l1"),9000);
+  setTimeout(()=>show("l2"),12000);
 
   setTimeout(()=>{
     show("big");
     document.getElementById("overlay").classList.add("shake");
-  },8500);
+  },15000);
 
-  setTimeout(()=>show("finalYes"),10000);
+  setTimeout(()=>show("finalYes"),18000);
 
   document.addEventListener("click",e=>{
     if(e.target && e.target.id==="finalYes"){
@@ -224,7 +212,6 @@ yesBtn.addEventListener("click",()=>{
   });
 });
 
-// hati awal
 setInterval(()=>{
   const heart=document.createElement("div");
   heart.className="heart";
