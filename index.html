@@ -51,7 +51,7 @@ img{
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.85);
+  background:rgba(0,0,0,.88);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -60,7 +60,7 @@ img{
   text-align:center;
   padding:20px;
   opacity:0;
-  transition:opacity 2s ease;
+  transition:opacity 1.5s ease;
 }
 
 .fade{
@@ -102,7 +102,7 @@ img{
 <button id="no" class="btn">No</button>
 
 <audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="music" type="audio/mpeg">
 </audio>
 
 <script>
@@ -180,65 +180,4 @@ yesBtn.addEventListener("click",()=>{
     after the distance, the flaws, the storms, and everything in between…
     </p>
 
-    <h2 id="big" class="fade" style="margin-top:30px;font-size:34px;">
-    Will you be my Valentine? 💕
-    </h2>
-
-    <button id="finalYes" class="fade"
-      style="margin-top:30px;padding:18px 40px;font-size:24px;
-      border:none;border-radius:16px;background:#ff4d6d;color:white;cursor:pointer;">
-      YES 💖
-    </button>
-  </div>
-  `;
-
-  const show=id=>document.getElementById(id).classList.add("show");
-
-  // total sekitar 1 menit
-  setTimeout(()=>show("overlay"),20000);
-  setTimeout(()=>show("l1"),35000);
-  setTimeout(()=>show("l2"),45000);
-
-  setTimeout(()=>{
-    show("big");
-    document.getElementById("overlay").classList.add("shake");
-  },55000);
-
-  setTimeout(()=>show("finalYes"),60000);
-
-  document.addEventListener("click",e=>{
-    if(e.target && e.target.id==="finalYes"){
-
-      // 🎉 CONFETTI
-      for(let i=0;i<120;i++){
-        const c=document.createElement("div");
-        c.innerHTML="🎉";
-        c.style.position="fixed";
-        c.style.left=Math.random()*100+"vw";
-        c.style.top="-10px";
-        c.style.fontSize=(Math.random()*20+10)+"px";
-        c.style.animation="fall "+(Math.random()*2+2)+"s linear forwards";
-        document.body.appendChild(c);
-        setTimeout(()=>c.remove(),4000);
-      }
-
-      setTimeout(()=>{
-        window.location.href=whatsapp;
-      },2000);
-    }
-  });
-});
-
-setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerText="💗";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(Math.random()*2+3)+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
-},300);
-</script>
-
-</body>
-  </html>
+    <h2 id="big" class="
