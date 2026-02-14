@@ -102,7 +102,7 @@ img{
 <button id="no" class="btn">No</button>
 
 <audio id="music" loop>
-  <source src="music" type="audio/mpeg">
+  <source src="romantis.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -124,7 +124,6 @@ noBtn.addEventListener("click",()=>{
 });
 
 yesBtn.addEventListener("click",()=>{
-  music.play();
 
   document.body.innerHTML=`
   <div class="letter">
@@ -192,12 +191,14 @@ yesBtn.addEventListener("click",()=>{
   </div>
   `;
 
+  // musik mulai saat surat muncul
+  setTimeout(()=>{document.getElementById("music").play();},500);
+
   const show=id=>document.getElementById(id).classList.add("show");
 
-  // baca surat lama
   setTimeout(()=>document.getElementById("overlay").style.opacity=1,55000);
 
-  // hanya 2 detik sebelum teks
+  // gelap hanya 2 detik
   setTimeout(()=>show("l1"),57000);
   setTimeout(()=>show("l2"),62000);
 
@@ -238,4 +239,4 @@ setInterval(()=>{
 </script>
 
 </body>
-</html>
+  </html>
