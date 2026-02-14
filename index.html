@@ -59,19 +59,13 @@ img{
 .fade{opacity:0;transition:1.5s;}
 .show{opacity:1;}
 
-.zoom{
-  animation:zoomIn 2s ease forwards;
-}
-
+.zoom{animation:zoomIn 2s ease forwards;}
 @keyframes zoomIn{
   from{transform:scale(.5);opacity:0;}
   to{transform:scale(1);opacity:1;}
 }
 
-.glow{
-  animation:glow 1s infinite alternate;
-}
-
+.glow{animation:glow 1s infinite alternate;}
 @keyframes glow{
   from{box-shadow:0 0 10px #ff4d6d;}
   to{box-shadow:0 0 25px #ff99ac;}
@@ -79,6 +73,18 @@ img{
 
 @keyframes fall{
   to{transform:translateY(100vh);opacity:0;}
+}
+
+/* ❤️ SHAKE EFFECT */
+@keyframes shake{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(2px,-2px);}
+  50%{transform:translate(-2px,2px);}
+  75%{transform:translate(2px,2px);}
+  100%{transform:translate(0,0);}
+}
+.shake{
+  animation:shake .25s infinite;
 }
 </style>
 </head>
@@ -91,41 +97,47 @@ img{
 <button id="yes" class="btn">Yes 💖</button>
 <button id="no" class="btn">No</button>
 
-<!-- musik baca surat -->
 <audio id="music" loop>
   <source src="romantis.mp3" type="audio/mpeg">
 </audio>
 
-<!-- suara confetti -->
-<audio id="confettiSound">
-  <source src="confetti" type="audio/mpeg">
-</audio>
-
-<!-- detak jantung -->
-<audio id="heartbeat" loop>
-  <source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
+<audio id="clickSound"><source src="click.mp3" type="audio/mpeg"></audio>
+<audio id="noSound"><source src="no.mp3" type="audio/mpeg"></audio>
+<audio id="typingSound"><source src="typing.mp3" type="audio/mpeg"></audio>
+<audio id="heartbeat"><source src="heartbeat.mp3" type="audio/mpeg"></audio>
+<audio id="confettiSound"><source src="confetti.mp3" type="audio/mpeg"></audio>
 
 <script>
 const whatsapp="https://wa.me/6287798652617?text=I%20choose%20you%20❤️";
+
 const yesBtn=document.getElementById("yes");
 const noBtn=document.getElementById("no");
+
 const music=document.getElementById("music");
-const confettiSound=document.getElementById("confettiSound");
+const clickSound=document.getElementById("clickSound");
+const noSound=document.getElementById("noSound");
+const typingSound=document.getElementById("typingSound");
 const heartbeat=document.getElementById("heartbeat");
+const confettiSound=document.getElementById("confettiSound");
 
 let scale=1;
 
 noBtn.addEventListener("click",()=>{
+  noSound.currentTime=0;
+  noSound.play();
+
   const x=Math.random()*window.innerWidth*0.8;
   const y=Math.random()*window.innerHeight*0.8;
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
+
   scale+=0.25;
   yesBtn.style.transform=`scale(${scale})`;
 });
 
 yesBtn.addEventListener("click",()=>{
+
+  clickSound.play();
 
   document.body.innerHTML=`
   <div class="letter">
@@ -135,16 +147,16 @@ yesBtn.addEventListener("click",()=>{
 
   <div id="overlay" class="overlay">
     <p id="l1" class="fade">And if you still choose me...</p>
-    <p id="l2" class="fade">After the distance,</p>
-    <p id="l3" class="fade">After the flaws,</p>
-    <p id="l4" class="fade">After the storm,</p>
-    <p id="l5" class="fade">After Everything... </p>
+    <p id="l2" class="fade">after everything,</p>
+    <p id="l3" class="fade">after my flaws,</p>
+    <p id="l4" class="fade">after the distance,</p>
+    <p id="l5" class="fade">after the storms I bring to our sky...</p>
 
     <h2 id="big" class="fade" style="margin-top:20px;">
       Will you be my Valentine? 💕
     </h2>
 
-    <button id="finalYes" class="fade"
+    <button id="finalYes" class="fade glow"
       style="margin-top:20px;padding:15px 35px;font-size:22px;
       border:none;border-radius:14px;background:#ff4d6d;color:white;cursor:pointer;">
       YES 💖
@@ -186,6 +198,9 @@ Your Baby 💗
 
   function typeWriter(){
     if(i<text.length){
+      typingSound.currentTime=0;
+      typingSound.play();
+
       if(text.substring(i,i+4)==="<br>"){
         target.innerHTML+="<br>";
         i+=4;
@@ -193,6 +208,7 @@ Your Baby 💗
         target.innerHTML+=text.charAt(i);
         i++;
       }
+
       setTimeout(typeWriter,30);
     } else {
       setTimeout(showOverlay,2000);
@@ -207,18 +223,17 @@ Your Baby 💗
     setTimeout(()=>l4.classList.add("show"),6500);
     setTimeout(()=>l5.classList.add("show"),8000);
 
-    // ❤️ mulai detak jantung sebelum pertanyaan
-    setTimeout(()=>heartbeat.play(),9000);
+    setTimeout(()=>{
+      heartbeat.play();
+      document.body.classList.add("shake");
+    },9000);
 
     setTimeout(()=>{
       big.classList.add("show");
       big.classList.add("zoom");
     },10000);
 
-    setTimeout(()=>{
-      finalYes.classList.add("show");
-      finalYes.classList.add("glow");
-    },12000);
+    setTimeout(()=>finalYes.classList.add("show"),12000);
   }
 
   typeWriter();
@@ -226,6 +241,7 @@ Your Baby 💗
   document.addEventListener("click",e=>{
     if(e.target && e.target.id==="finalYes"){
       heartbeat.pause();
+      document.body.classList.remove("shake");
       confettiSound.play();
 
       for(let i=0;i<120;i++){
