@@ -45,7 +45,7 @@ img{
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.9);
+  background:rgba(0,0,0,.92);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -53,10 +53,29 @@ img{
   color:white;
   opacity:0;
   transition:opacity 1.5s ease;
+  padding:20px;
 }
 
 .fade{opacity:0;transition:1.5s;}
 .show{opacity:1;}
+
+.zoom{
+  animation:zoomIn 2s ease forwards;
+}
+
+@keyframes zoomIn{
+  from{transform:scale(.5);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+.glow{
+  animation:glow 1s infinite alternate;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 10px #ff4d6d;}
+  to{box-shadow:0 0 25px #ff99ac;}
+}
 
 @keyframes fall{
   to{transform:translateY(100vh);opacity:0;}
@@ -72,12 +91,19 @@ img{
 <button id="yes" class="btn">Yes 💖</button>
 <button id="no" class="btn">No</button>
 
+<!-- musik baca surat -->
 <audio id="music" loop>
   <source src="romantis.mp3" type="audio/mpeg">
 </audio>
 
+<!-- suara confetti -->
 <audio id="confettiSound">
   <source src="confetti" type="audio/mpeg">
+</audio>
+
+<!-- detak jantung -->
+<audio id="heartbeat" loop>
+  <source src="heartbeat.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -86,6 +112,7 @@ const yesBtn=document.getElementById("yes");
 const noBtn=document.getElementById("no");
 const music=document.getElementById("music");
 const confettiSound=document.getElementById("confettiSound");
+const heartbeat=document.getElementById("heartbeat");
 
 let scale=1;
 
@@ -108,7 +135,15 @@ yesBtn.addEventListener("click",()=>{
 
   <div id="overlay" class="overlay">
     <p id="l1" class="fade">And if you still choose me...</p>
-    <h2 id="big" class="fade">Will you be my Valentine? 💕</h2>
+    <p id="l2" class="fade">after everything,</p>
+    <p id="l3" class="fade">after my flaws,</p>
+    <p id="l4" class="fade">after the distance,</p>
+    <p id="l5" class="fade">after the storms I bring to our sky...</p>
+
+    <h2 id="big" class="fade" style="margin-top:20px;">
+      Will you be my Valentine? 💕
+    </h2>
+
     <button id="finalYes" class="fade"
       style="margin-top:20px;padding:15px 35px;font-size:22px;
       border:none;border-radius:14px;background:#ff4d6d;color:white;cursor:pointer;">
@@ -121,17 +156,28 @@ yesBtn.addEventListener("click",()=>{
 
   const text = `
 Dear My love of my life,<br><br>
-To you, standing far away from me, separated by thousands of kilometers,
-yet somehow living in every beat of my heart.<br><br>
+To you, standing far away from me, separated by thousands of kilometers, yet somehow living in every beat of my heart.<br><br>
+
 Thank you for staying with me this far.
+Thank you for holding my hand even when it’s hard, for becoming a home for all my worries, my chaos, and every small piece of me.
 Thank you for loving me while knowing I am far from perfect.<br><br>
-I'm sorry I haven’t become the version of myself that you truly deserve.
-I'm sorry if my love still feels smaller than what you give to me.<br><br>
-Through every storm, you stay.<br><br>
-Thank you.<br>
+
+I’m sorry I haven’t become the version of myself that you truly deserve.
+I’m sorry if my love still feels smaller than what you give to me.
+And I’m sorry you must face my moods — my pessimistic thoughts, my impatience, my endless complaints, the weight I carry, my tears, and the many flaws I am still learning to fix.<br><br>
+
+Through every storm that I sometimes bring into our sky, you stay.
+And that means more than I could ever explain.<br><br>
+
+These months with you have been a journey of highs and lows, laughter and breakdowns, warm hugs through a cold distance.
+It is not easy — loving me is not easy — but you are still here.<br><br>
+
+Thank you.
 From the deepest part of my heart, thank you.<br><br>
-You are, and will always be,
-the most beautiful gift I have ever received.<br><br>
+
+I am so grateful you walked into my life and painted it with colors I never knew existed.
+You are, and will always be, the most beautiful gift I have ever received.<br><br>
+
 Your Baby 💗
 `;
 
@@ -140,8 +186,6 @@ Your Baby 💗
 
   function typeWriter(){
     if(i<text.length){
-
-      // 🔥 kalau ketemu <br> → langsung masukkan
       if(text.substring(i,i+4)==="<br>"){
         target.innerHTML+="<br>";
         i+=4;
@@ -149,27 +193,41 @@ Your Baby 💗
         target.innerHTML+=text.charAt(i);
         i++;
       }
-
-      setTimeout(typeWriter,35);
-
+      setTimeout(typeWriter,30);
     } else {
       setTimeout(showOverlay,2000);
     }
   }
 
   function showOverlay(){
-    const overlay=document.getElementById("overlay");
     overlay.style.opacity=1;
-    setTimeout(()=>document.getElementById("l1").classList.add("show"),2000);
-    setTimeout(()=>document.getElementById("big").classList.add("show"),5000);
-    setTimeout(()=>document.getElementById("finalYes").classList.add("show"),8000);
+    setTimeout(()=>l1.classList.add("show"),2000);
+    setTimeout(()=>l2.classList.add("show"),3500);
+    setTimeout(()=>l3.classList.add("show"),5000);
+    setTimeout(()=>l4.classList.add("show"),6500);
+    setTimeout(()=>l5.classList.add("show"),8000);
+
+    // ❤️ mulai detak jantung sebelum pertanyaan
+    setTimeout(()=>heartbeat.play(),9000);
+
+    setTimeout(()=>{
+      big.classList.add("show");
+      big.classList.add("zoom");
+    },10000);
+
+    setTimeout(()=>{
+      finalYes.classList.add("show");
+      finalYes.classList.add("glow");
+    },12000);
   }
 
   typeWriter();
 
   document.addEventListener("click",e=>{
     if(e.target && e.target.id==="finalYes"){
+      heartbeat.pause();
       confettiSound.play();
+
       for(let i=0;i<120;i++){
         const c=document.createElement("div");
         c.innerHTML="🎉";
@@ -181,6 +239,7 @@ Your Baby 💗
         document.body.appendChild(c);
         setTimeout(()=>c.remove(),4000);
       }
+
       setTimeout(()=>window.location.href=whatsapp,2000);
     }
   });
@@ -188,4 +247,4 @@ Your Baby 💗
 </script>
 
 </body>
-</html>
+  </html>
