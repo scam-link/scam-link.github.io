@@ -180,4 +180,62 @@ yesBtn.addEventListener("click",()=>{
     after the distance, the flaws, the storms, and everything in between…
     </p>
 
-    <h2 id="big" class="
+    <h2 id="big" class="fade" style="margin-top:30px;font-size:34px;">
+    Will you be my Valentine? 💕
+    </h2>
+
+    <button id="finalYes" class="fade"
+      style="margin-top:30px;padding:18px 40px;font-size:24px;
+      border:none;border-radius:16px;background:#ff4d6d;color:white;cursor:pointer;">
+      YES 💖
+    </button>
+  </div>
+  `;
+
+  const show=id=>document.getElementById(id).classList.add("show");
+
+  // baca surat lama
+  setTimeout(()=>document.getElementById("overlay").style.opacity=1,55000);
+
+  // hanya 2 detik sebelum teks
+  setTimeout(()=>show("l1"),57000);
+  setTimeout(()=>show("l2"),62000);
+
+  setTimeout(()=>{
+    show("big");
+    document.getElementById("overlay").classList.add("shake");
+  },67000);
+
+  setTimeout(()=>show("finalYes"),71000);
+
+  document.addEventListener("click",e=>{
+    if(e.target && e.target.id==="finalYes"){
+      for(let i=0;i<120;i++){
+        const c=document.createElement("div");
+        c.innerHTML="🎉";
+        c.style.position="fixed";
+        c.style.left=Math.random()*100+"vw";
+        c.style.top="-10px";
+        c.style.fontSize=(Math.random()*20+10)+"px";
+        c.style.animation="fall "+(Math.random()*2+2)+"s linear forwards";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+      }
+      setTimeout(()=>{window.location.href=whatsapp;},2000);
+    }
+  });
+});
+
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerText="💗";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*2+3)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
